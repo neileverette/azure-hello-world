@@ -72,7 +72,7 @@
         "storageProfile": {
           "imageReference": {
             "publisher": "Canonical",
-            "offer": "UbuntuServer",
+            "offer": "0001-com-ubuntu-server-focal",
             "sku": "20_04-lts",
             "version": "latest"
           },
@@ -84,7 +84,7 @@
           "computerName": "myVM",
           "adminUsername": "azureuser",
           "adminPassword": "SecurePa$$w0rd!",
-          "customData": "[base64(concat('#!/bin/bash\napt-get update\napt-get install -y apache2 php\necho \"<?php echo \\'Hello World\\'; ?>\" > /var/www/html/index.php\nsystemctl restart apache2\n'))]"
+          "customData": "[base64('#!/bin/bash\napt-get update\napt-get install -y apache2 php\necho \"<?php echo \\\"Hello World\\\"; ?>\" > /var/www/html/index.php\nsystemctl restart apache2')]"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -95,11 +95,5 @@
         }
       }
     }
-  ],
-  "outputs": {
-    "publicIPAddress": {
-      "type": "string",
-      "value": "[reference('myPublicIP').ipAddress]"
-    }
-  }
+  ]
 }
