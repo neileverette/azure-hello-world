@@ -67,7 +67,7 @@
       ],
       "properties": {
         "hardwareProfile": {
-          "vmSize": "Standard_B1s"
+          "vmSize": "Standard_B2s"
         },
         "storageProfile": {
           "imageReference": {
@@ -84,7 +84,7 @@
           "computerName": "myVM",
           "adminUsername": "azureuser",
           "adminPassword": "SecurePa$$w0rd!",
-          "customData": "[base64('#!/bin/bash\napt-get update\napt-get install -y apache2 php\necho \"<?php echo \\\"Hello World\\\"; ?>\" > /var/www/html/index.php\nsystemctl restart apache2')]"
+          "customData": "[base64(concat('#!/bin/bash\n', 'apt-get update -y\n', 'apt-get install -y apache2 php\n', 'systemctl start apache2\n', 'systemctl enable apache2\n', 'cat <<EOL > /var/www/html/index.php\n', '<!DOCTYPE html>\n', '<html>\n', '<head>\n', '    <title>::: CloudFormation Template :::</title>\n', '</head>\n', '<body>\n', '    <h1><?php echo date(\\'F j, Y, g:i A\\'); ?></h1>\n', '    <h3>This actually worked</h3>\n', '    <h3>Authored by Designer: Neil Everette</h3>\n', '    <p>This is my new CloudFormation template</p>\n', '</body>\n', '</html>\n', 'EOL\n', 'chown -R www-data:www-data /var/www/html\n', 'chmod 664 /var/www/html/index.php\n'))]"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -95,5 +95,11 @@
         }
       }
     }
-  ]
+  ],
+  "outputs": {
+    "publicIPAddress": {
+      "type": "string",
+      "value": "[reference('myPublicIP').ipAddress]"
+    }
+  }
 }
