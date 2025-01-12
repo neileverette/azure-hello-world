@@ -83,8 +83,7 @@
         "osProfile": {
           "computerName": "myVM",
           "adminUsername": "azureuser",
-          "adminPassword": "SecurePa$$w0rd!",
-          "customData": "[base64('#!/bin/bash\napt-get update\napt-get install -y apache2 php\necho \"<?php echo \\\"Hello World\\\"; ?>\" > /var/www/html/index.php\nsystemctl restart apache2')]"
+          "adminPassword": "SecurePa$$w0rd!"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -94,6 +93,33 @@
           ]
         }
       }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "apiVersion": "2021-07-01",
+      "name": "myCustomScriptExtension",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines', 'myVM')]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.1",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [
+            "https://raw.githubusercontent.com/your-repo/your-branch/hello-world-php-script.sh"
+          ],
+          "commandToExecute": "bash hello-world-php-script.sh"
+        }
+      }
     }
-  ]
+  ],
+  "outputs": {
+    "publicIPAddress": {
+      "type": "string",
+      "value": "[reference('myPublicIP').ipAddress]"
+    }
+  }
 }
