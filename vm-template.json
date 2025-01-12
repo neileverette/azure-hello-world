@@ -84,7 +84,7 @@
           "computerName": "myVM",
           "adminUsername": "azureuser",
           "adminPassword": "SecurePa$$w0rd!",
-          "customData": "[base64(concat('#!/bin/bash\n', 'apt-get update -y\n', 'apt-get install -y apache2 php\n', 'systemctl start apache2\n', 'systemctl enable apache2\n', 'cat <<EOL > /var/www/html/index.php\n', '<!DOCTYPE html>\n', '<html>\n', '<head>\n', '    <title>::: CloudFormation Template :::</title>\n', '</head>\n', '<body>\n', '    <h1><?php echo date(\\'F j, Y, g:i A\\'); ?></h1>\n', '    <h3>This actually worked</h3>\n', '    <h3>Authored by Designer: Neil Everette</h3>\n', '    <p>This is my new CloudFormation template</p>\n', '</body>\n', '</html>\n', 'EOL\n', 'chown -R www-data:www-data /var/www/html\n', 'chmod 664 /var/www/html/index.php\n'))]"
+          "customData": "[base64(concat('#!/bin/bash\napt-get update -y\napt-get install -y apache2 php\nsystemctl start apache2\nsystemctl enable apache2\ncat <<EOL > /var/www/html/index.php\n<!DOCTYPE html>\n<html>\n<head>\n    <title>::: CloudFormation Template :::</title>\n</head>\n<body>\n    <h1><?php echo date(\"F j, Y, g:i A\"); ?></h1>\n    <h3>This actually worked</h3>\n    <h3>Authored by Designer: Neil Everette</h3>\n    <p>This is my new CloudFormation template</p>\n</body>\n</html>\nEOL\nchown -R www-data:www-data /var/www/html\nchmod 664 /var/www/html/index.php\n'))]"
         },
         "networkProfile": {
           "networkInterfaces": [
