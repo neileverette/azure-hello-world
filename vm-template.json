@@ -67,7 +67,7 @@
       ],
       "properties": {
         "hardwareProfile": {
-          "vmSize": "Standard_B2s"
+          "vmSize": "Standard_B1s"
         },
         "storageProfile": {
           "imageReference": {
@@ -84,8 +84,8 @@
           "computerName": "myVM",
           "adminUsername": "azureuser",
           "adminPassword": "SecurePa$$w0rd!",
-          "customData": "[base64('#!/bin/bash\napt-get update\napt-get install -y apache2 php\necho \"<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World</title>\n</head>\n<body>\n<h1>Hello World</h1>\n<p><?php echo \\\"Hello World\\\"; ?></p>\n</body>\n</html>\" > /var/www/html/index.php\nsystemctl restart apache2')]"
-                },
+          "customData": "[base64('#!/bin/bash\napt-get update\napt-get install -y apache2 php\necho \"<?php echo \\\"Hello World\\\"; ?>\" > /var/www/html/index.php\nsystemctl restart apache2')]"
+        },
         "networkProfile": {
           "networkInterfaces": [
             {
