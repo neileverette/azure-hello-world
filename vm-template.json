@@ -97,7 +97,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "apiVersion": "2021-07-01",
-      "name": "myCustomScriptExtension",
+      "name": "myVM/myCustomScriptExtension",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines', 'myVM')]"
