@@ -1,14 +1,12 @@
 name: Deploy Azure VM with Bicep
 
 on:
-    workflow_dispatch:
-    push:
-      branches:
-        - main
-      paths:
-        - 'vm-deploy.bicep'
-        - '.github/workflows/azure-deploy.yml'
-  
+  push:
+    branches:
+      - main
+    paths:
+      - 'vm-deploy.bicep'
+      - '.github/workflows/azure-deploy.yml'
 
 jobs:
   deploy:
