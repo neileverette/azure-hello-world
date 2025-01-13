@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'vm-deploy.bicep'
-      - '.github/workflows/deploy-azure.yml'
+      - '.github/workflows/azure-deploy.yml'
 
 jobs:
   deploy:
@@ -21,10 +21,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Install Bicep CLI
+      run: az bicep install
+
     - name: Deploy Bicep Template
       run: |
         az deployment group create \
           --resource-group My-resource-group \
           --template-file ./vm-deploy.bicep \
           --parameters adminUsername=azureuser adminPassword=${{ secrets.ADMIN_PASSWORD }} \
-          --name vm-deployment
+          --name vm-deployment-${{ github.run_number }}
